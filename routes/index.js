@@ -1,5 +1,6 @@
-var express = require('express');
-var router = express.Router();
+
+let express = require('express');
+let router = express.Router();
 const fs = require("fs");
 
 /* GET home page. */
@@ -54,13 +55,19 @@ router.get('/about', function(req, res, next) {
 router.get('/contact', function(req, res, next) {
   res.render('contact', { title: 'Contact Page' });
 });
-/* GET Contact submision Thank You page. */
-router.get("/home", function(req, res, next) {
-  res.render('index', { title: 'Home Page' });
+/* GET Contact submision  page. */
+router.post("/contact", function(req, res) {
+  console.log(req.body.email);
+  console.log(req.body.fname);
+  console.log(req.body.lname);
+  console.log(req.body.message);
+  res.redirect("/home");
 });
 
+
+
 router.get("/resume",(req, res, next)=>{
-    var data =fs.readFileSync('./public/Assets/Resume_Nikhil.pdf');
+    let data =fs.readFileSync('./public/Assets/Resume_Nikhil.pdf');
     res.contentType("application/pdf");
     res.send(data);
 });
